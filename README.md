@@ -2,6 +2,8 @@
 
 A restaurant waitlist where guests see in real time whether they can sit down now or how many parties are ahead of them. They join the line from their phone and get pinged when their table is ready. Staff run everything from a simple host dashboard.
 
+https://you-got-t.vercel.app
+
 ## Run it
 
 ```bash
