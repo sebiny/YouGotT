@@ -1,0 +1,25 @@
+slug - name of the restaurant
+stream - It is created once, when the browser first connects, and stays open. The server keeps sending data. Like a live video or a radio broadcast.
+
+In sseResponse, the ReadableStream is the open connection to one person's browser. Each time something changes, the server writes a new message into it, and the page updates without a refresh.
+
+Subscribe
+- tell me whenever X happens.
+- You register a function (a listener) and it gets called each time the event occurs, so you don't have to keep checking.(Like you don't have to subscribe to a youtube channel. )
+
+const off = onChange(refresh);
+"whenever the restautant's data changes, call refresh. onChange returns a function(off) that unsubscribes, which is called later during cleanup."
+off();
+
+A guest opens the page → the server opens a stream to them.
+
+The server subscribes that stream’s refresh function to changes for that restaurant’s slug (e.g. demo-bistro).
+
+The host taps Notify → a change happens → every subscribed listener runs → each guest’s stream gets new data.
+
+The guest closes the tab → the server unsubscribes and closes the stream.
+
+Schema
+: the rule describing what valid data looks like.
+Zod
+: the library we use to write those rules and check data against them
