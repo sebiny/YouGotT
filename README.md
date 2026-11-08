@@ -4,16 +4,6 @@ A restaurant waitlist where guests see in real time whether they can sit down no
 
 https://you-got-t.vercel.app
 
-## Run it
-
-```bash
-npm install
-npm run db:setup   # creates the SQLite database and loads demo restaurants
-npm run dev        # http://localhost:3000
-```
-
-Copy `.env.example` to `.env` first if `.env` doesn't exist, and set `AUTH_SECRET` to any long random string.
-
 ## Demo restaurants
 
 | Restaurant | Guest page | Host PIN | State |
