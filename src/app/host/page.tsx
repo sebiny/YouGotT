@@ -10,19 +10,23 @@ export default async function OwnerHome() {
     orderBy: { name: "asc" },
   });
   return (
-    <div className="mx-auto max-w-lg space-y-6">
+    <div className="mx-auto max-w-lg space-y-2">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Restaurant owners</h1>
-        <p className="text-stone-600">Log in to your dashboard, or add your restaurant.</p>
+        {/* <p className="text-stone-600">
+          Log in to your dashboard, or add your restaurant.
+        </p> */}
       </div>
-
+      {/* 
       <Link href="/host/new" className="btn-primary w-full py-3 text-base">
         + Add your restaurant
-      </Link>
+      </Link> */}
 
       {restaurants.length > 0 && (
         <section className="space-y-2">
-          <h2 className="text-sm font-medium text-stone-500">Already registered? Pick yours:</h2>
+          <h2 className="text-sm font-medium text-stone-500">
+            It you're the owner, Pick yours:
+          </h2>
           <ul className="space-y-2">
             {restaurants.map((r) => (
               <li key={r.slug}>
@@ -32,7 +36,11 @@ export default async function OwnerHome() {
                 >
                   <span>
                     <span className="font-semibold">{r.name}</span>
-                    {r.address && <span className="block text-sm text-stone-500">{r.address}</span>}
+                    {r.address && (
+                      <span className="block text-sm text-stone-500">
+                        {r.address}
+                      </span>
+                    )}
                   </span>
                   <span className="text-sm text-stone-500">Log in →</span>
                 </Link>

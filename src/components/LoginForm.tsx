@@ -4,7 +4,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { postJson } from "@/lib/client";
 
-export function LoginForm({ slug, name }: { slug: string; name: string }) {
+export function LoginForm({
+  slug,
+  name,
+  demoPin,
+}: {
+  slug: string;
+  name: string;
+  demoPin?: string;
+}) {
   const router = useRouter();
   const [pin, setPin] = useState("");
   const [error, setError] = useState<string>();
@@ -27,7 +35,10 @@ export function LoginForm({ slug, name }: { slug: string; name: string }) {
     <form onSubmit={submit} className="card mx-auto max-w-sm space-y-4">
       <h1 className="text-xl font-semibold">{name}: staff login</h1>
       <label className="block">
-        <span className="mb-1 block text-sm text-stone-600">Host PIN</span>
+        <span className="mb-1 flex items-center justify-between gap-2 text-sm text-stone-600">
+          <span>Host PIN</span>
+          {demoPin && <span>Demo PIN: <span className="font-mono font-semibold">{demoPin}</span></span>}
+        </span>
         <input
           className="input text-center text-2xl tracking-[0.5em]"
           type="password"

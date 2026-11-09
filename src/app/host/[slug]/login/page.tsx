@@ -23,11 +23,13 @@ export default async function LoginPage({
     orderBy: { name: "asc" },
     take: 3,
   });
-  const seedPins = new Map(seedRestaurants.map(({ slug, pin }) => [slug, pin]));
+  const demoPin = seedRestaurants.find(
+    (restaurant) => restaurant.slug === slug,
+  )?.pin;
 
   return (
-    <div className="mx-auto grid max-w-3xl grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-start gap-3 sm:gap-5">
-      <aside className="card min-w-0 w-full space-y-3">
+    <div className="flex justify-center mt-15">
+      {/* <aside className="card min-w-0 w-full space-y-3">
         <div>
           <h2 className="text-lg font-semibold">Top Restaurants</h2>
           <p className="text-sm text-stone-500">
@@ -51,17 +53,12 @@ export default async function LoginPage({
                 </span>
                 <span className="font-medium">{restaurant.name}</span>
               </Link>
-              {seedPins.has(restaurant.slug) && (
-                <p className="px-3 pt-1 text-xs text-stone-500">
-                  Demo PIN: <span className="font-mono">{seedPins.get(restaurant.slug)}</span>
-                </p>
-              )}
             </li>
           ))}
         </ol>
-      </aside>
+      </aside> */}
       <div className="min-w-0">
-        <LoginForm slug={slug} name={r.name} />
+        <LoginForm slug={slug} name={r.name} demoPin={demoPin} />
       </div>
     </div>
   );
