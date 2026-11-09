@@ -1,16 +1,10 @@
 # Live Waitlist
+Many people lining up on the street in Vancouver, they wait until they get inside not knowing when.
+It’s not efficient for both customers and restaurants.
+Using this, people can see if they’re not available to go or not and if not, how much time they need to wait based on how many people they have ahead of them.
+Customer send name, how many, phone number and they can see the approximate time when they reserve it and then, when the store send the msg that they can come now but in 10min(otherwise, the reservation will be cancelled) they notice it and they can come.
 
-A restaurant waitlist where guests see in real time whether they can sit down now or how many parties are ahead of them. They join the line from their phone and get pinged when their table is ready. Staff run everything from a simple host dashboard.
-
-## Run it
-
-```bash
-npm install
-npm run db:setup   # creates the SQLite database and loads demo restaurants
-npm run dev        # http://localhost:3000
-```
-
-Copy `.env.example` to `.env` first if `.env` doesn't exist, and set `AUTH_SECRET` to any long random string.
+https://you-got-t.vercel.app
 
 ## Demo restaurants
 
