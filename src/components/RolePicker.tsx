@@ -27,7 +27,7 @@ export function RolePicker({ lastRestaurant }: { lastRestaurant?: string }) {
           <span className="text-sm text-stone-500">Find a table and join the line</span>
         </button>
         <button
-          onClick={() => choose("owner")}
+          onClick={() => router.push("/host/")}
           className="card flex flex-col items-center gap-2 p-8 transition hover:border-stone-400 hover:shadow-md"
         >
           <span className="text-5xl">🧑‍🍳</span>
