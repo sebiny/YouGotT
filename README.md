@@ -7,8 +7,8 @@ Customer send name, how many, phone number and they can see the approximate time
 https://you-got-t.vercel.app
 
 
-<img width="400" height="250" alt="image" src="https://github.com/user-attachments/assets/8e7db998-66e1-4cad-ba89-1e5cec7f7eed" />
-<img width="500" height="350" pl="30" alt="image" src="https://github.com/user-attachments/assets/ef22b969-ea1d-4bf7-985f-3325e53c7265" />
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/8e7db998-66e1-4cad-ba89-1e5cec7f7eed" />
+<img width="500" height="350" pl="20" alt="image" src="https://github.com/user-attachments/assets/ef22b969-ea1d-4bf7-985f-3325e53c7265" />
 
 ## Demo restaurants
 
