@@ -50,35 +50,63 @@ export function sseResponse(
   //It creates a stream that stays open ReadableStream and sends text in the SSE format(only server->client)
 ) {
   const encoder = new TextEncoder();
-  let cleanup = () => {};
+  let stop = () => {};
   const stream = new ReadableStream({
-    async start(controller) {
+    start(controller) {
       let closed = false;
-      const send = (event: string, data: unknown) => {
-        if (!closed) controller.enqueue(encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`));
-      };
-      const refresh = () => push(send).catch((e) => console.error("stream refresh failed", e));
-//refresh() calls your push function, which builds the latest queue data and sends it.
+      let off = () => {};
+      let timer: ReturnType<typeof setInterval> | undefined;
+      let onAbort = () => {};
 
-      await refresh();
-      //when the connection opens, it sends data immediately
-      const off = onChange(refresh);
-      //onChange(refresh) subscribe to your in-memory event broadcaster(events.ts). Whenever someone joins, is seated or is removed, refresh runs and everyone connected gets the update instantly.
-      // Periodic refresh keeps "minutes waited" fresh and doubles as a keep-alive.
-      const timer = setInterval(refresh, 30_000);
-      cleanup = () => {
+      const cleanup = (closeController: boolean) => {
         if (closed) return;
         closed = true;
         off();
-        clearInterval(timer);
-        try {
-          controller.close();
-        } catch {}
+        if (timer) clearInterval(timer);
+        req.signal.removeEventListener("abort", onAbort);
+        if (closeController) {
+          try {
+            controller.close();
+          } catch {
+            // The consumer may already have canceled the stream.
+          }
+        }
       };
-      req.signal.addEventListener("abort", cleanup);
+
+      onAbort = () => cleanup(true);
+      const send = (event: string, data: unknown) => {
+        if (closed || req.signal.aborted) return;
+        try {
+          controller.enqueue(encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`));
+        } catch {
+          // A disconnect can cancel the stream before the abort event is observed.
+          cleanup(false);
+        }
+      };
+      const refresh = async () => {
+        if (closed || req.signal.aborted) return;
+        try {
+          await push(send);
+        } catch (e) {
+          if (!closed) console.error("stream refresh failed", e);
+        }
+      };
+
+      off = onChange(() => void refresh());
+      // Periodic refresh keeps wait times current and doubles as a keep-alive.
+      timer = setInterval(() => void refresh(), 30_000);
+      stop = () => cleanup(false);
+      req.signal.addEventListener("abort", onAbort, { once: true });
+      if (req.signal.aborted) {
+        onAbort();
+        return;
+      }
+
+      // Start refreshing after cleanup has been registered to avoid disconnect races.
+      void refresh();
     },
     cancel() {
-      cleanup();
+      stop();
     },
   });
   return new Response(stream, {
