@@ -5,9 +5,9 @@ Using this, people can see if they’re not available to go or not and if not, h
 Customer send name, how many, phone number and they can see the approximate time when they reserve it and then, when the store send the msg that they can come now but in 10min(otherwise, the reservation will be cancelled) they notice it and they can come.
 
 https://you-got-t.vercel.app
-<img width="860" height="516" alt="image" src="https://github.com/user-attachments/assets/8e7db998-66e1-4cad-ba89-1e5cec7f7eed" />
-<img width="787" height="542" alt="image" src="https://github.com/user-attachments/assets/ef22b969-ea1d-4bf7-985f-3325e53c7265" />
-<img width="1074" height="480" alt="image" src="https://github.com/user-attachments/assets/98e82963-cbb6-4011-9b75-efbdd2b09e6d" />
+<img width="400" height="250" alt="image" src="https://github.com/user-attachments/assets/8e7db998-66e1-4cad-ba89-1e5cec7f7eed" />
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/ef22b969-ea1d-4bf7-985f-3325e53c7265" />
+<img width="500" height="240" alt="image" src="https://github.com/user-attachments/assets/98e82963-cbb6-4011-9b75-efbdd2b09e6d" />
 
 ## Demo restaurants
 
